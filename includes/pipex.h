@@ -6,11 +6,15 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:49:22 by elaachac          #+#    #+#             */
-/*   Updated: 2021/10/21 14:50:20 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/10/21 19:50:57 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+#include <stdio.h>
+#include <stdlib.h>
+# include <unistd.h>
 
 #endif
