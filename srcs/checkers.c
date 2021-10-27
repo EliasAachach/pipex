@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 00:18:29 by elaachac          #+#    #+#             */
-/*   Updated: 2021/10/27 12:48:58 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:19:19 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,32 @@ void	file_check(char *pathname, char *path)
 	}
 }
 
-int	cmd_check2(int cmd_ok, char **path, char *pathname)
+int	cmd_check2(int cmd_ok, char **env_path, char *pathname, t_path *path)
 {
 	if (cmd_ok == 0)
 	{
-		free_split(path);
+		free_split(path->cmd_path);
+		free_split(env_path);
 		perror(pathname);
 		return (1);
 	}
-	free_split(path);
+	else
+		free_split(env_path);
 	return (0);
+}
+
+void	cmd_check3(int i, int *cmd_ok, char **env_path, t_path *path)
+{
+	while (--i)
+	{
+		if (access(env_path[i], F_OK) != -1)
+		{
+			path->cmd_path[path->cmd_index] = ft_strdup(env_path[i]);
+			path->cmd_index++;
+			*cmd_ok = 1;
+			break ;
+		}
+	}
 }
 
 int	cmd_check(char *pathname, t_path *path)
@@ -43,22 +59,17 @@ int	cmd_check(char *pathname, t_path *path)
 
 	i = -1;
 	cmd_ok = 0;
+	tmp = NULL;
+	env_path = NULL;
 	env_path = ft_split(path->var_env, ':');
 	while (env_path[++i])
 	{
 		tmp = ft_strjoin(env_path[i], "/");
 		free(env_path[i]);
+		env_path[i] = NULL;
 		env_path[i] = ft_strjoin(tmp, pathname);
 		free(tmp);
 	}
-	while (--i)
-	{
-		if (access(env_path[i], F_OK) != -1)
-		{
-			path->cmd_path[path->cmd_index] = ft_strdup(env_path[i]);
-			path->cmd_index++;
-			cmd_ok = 1;
-		}
-	}
-	return (cmd_check2(cmd_ok, env_path, pathname));
+	cmd_check3(i, &cmd_ok, env_path, path);
+	return (cmd_check2(cmd_ok, env_path, pathname, path));
 }

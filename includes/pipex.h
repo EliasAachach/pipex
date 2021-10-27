@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:49:22 by elaachac          #+#    #+#             */
-/*   Updated: 2021/10/27 12:27:28 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/10/27 15:44:30 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_path
 	int		cmd_index;
 }				t_path;
 
+void	ft_bzero(void *s, size_t n);
+void	free_path(t_path *path);
 void	file_check(char *pathname, char *path);
 void	free_split(char **array);
 char	**ft_split(char const *s, char c);

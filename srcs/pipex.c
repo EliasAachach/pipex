@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:51:10 by elaachac          #+#    #+#             */
-/*   Updated: 2021/10/27 12:58:10 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/10/27 15:58:24 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	check_args(int argc, char **argv, t_path *path)
 
 void	free_path(t_path *path)
 {
-	free(path->var_env);
-	free_split(path->cmd_path);
+	if (path->var_env)
+		free(path->var_env);
+	if (path->cmd_path)
+		free_split(path->cmd_path);
 }
 
 void	init_path(t_path *path, char **envp, int argc)
@@ -66,6 +68,8 @@ int	main(int argc, char **argv, char **envp)
 
 	init_path(&path, envp, argc);
 	check_args(argc, argv, &path);
+	system(path.cmd_path[0]);
+	system(path.cmd_path[1]);
 	free_path(&path);
 	return (0);
 }
