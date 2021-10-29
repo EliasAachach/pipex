@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 15:40:23 by elaachac          #+#    #+#             */
-/*   Updated: 2021/10/28 16:19:45 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/10/29 12:07:46 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list	*newlist(void)
 		return (NULL);
 	if (newlist != NULL)
 	{
-		newlist->lenght = 0;
+		newlist->length = 0;
 		newlist->head = NULL;
 		newlist->tail = NULL;
 	}
@@ -36,9 +36,9 @@ void	dellist(t_list **list)
 	if (list != NULL)
 	{
 		tmp = (*list)->head;
-		while ((*list)->lenght > 0)
+		while ((*list)->length > 0)
 		{
-			(*list)->lenght--;
+			(*list)->length--;
 			del = tmp;
 			if (tmp->next)
 				tmp = tmp->next;
@@ -89,7 +89,7 @@ t_node	*add_head_list(t_list **list, char **cmd)
 			newnode->prev = (*list)->tail;
 			(*list)->head = newnode;
 		}
-		(*list)->lenght++;
+		(*list)->length++;
 	}
 	return (init_node(newnode, cmd));
 }
@@ -118,7 +118,7 @@ t_node	*add_tail_list(t_list **list, char **cmd)
 			newnode->prev = (*list)->tail;
 			(*list)->tail = newnode;
 		}
-		(*list)->lenght++;
+		(*list)->length++;
 	}
 	return (init_node(newnode, cmd));
 }

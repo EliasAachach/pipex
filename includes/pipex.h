@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:49:22 by elaachac          #+#    #+#             */
-/*   Updated: 2021/10/28 16:24:54 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/10/29 12:07:46 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_node
 
 typedef struct s_list
 {
-	size_t	lenght;
+	size_t	length;
 	t_node	*head;
 	t_node	*tail;
 }				t_list;
