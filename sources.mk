@@ -1,3 +1,4 @@
+
 ## SOURCES.MK ##
 
 ## SRCS ##
@@ -20,5 +21,3 @@ SOURCES		+=                   		\
 SOURCES		+=                   		\
 		srcs/utils/utils.c          	\
 		srcs/utils/utils2.c         	\
-
-
