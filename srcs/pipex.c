@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:51:10 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/01 18:30:42 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/09 17:25:19 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	check_args(int argc, char **argv, t_path *path, t_list **exec)
 			exit(0);
 		}
 		add_tail_list(exec, path->cmd_argv);
-		// stock_args(path->cmd_argv, path);
+		if (path->cmd_argv)
+			free_split(path->cmd_argv);
 		i++;
-		// free_split(path->cmd_argv);
 	}
 }
 
@@ -54,16 +54,17 @@ void	free_path(t_path *path)
 		free(path->var_env);
 	if (path->cmd_path)
 		free_split(path->cmd_path);
-	if (path->cmd_argv)
-		free_split(path->cmd_argv);
+	// if (path->cmd_argv)
+	// 	free_split(path->cmd_argv);
 }
 
 void	init_path(t_path *path, char **envp, int argc)
 {
 	path->var_env = ft_strdup(get_path(envp) + 5);
 	path->cmd_path = (char **)malloc(sizeof(char *) * argc - 3);
+	ft_bzero(path->cmd_path, sizeof(char *) * argc - 3);
 	path->cmd_argv = (char **)malloc(sizeof(char *) * argc - 3);
-	// path->cmd_argv[0] = NULL;
+	ft_bzero(path->cmd_argv, sizeof(char *) * argc - 3);
 	path->cmd_index = 0;
 	path->argv_index = 0;
 }

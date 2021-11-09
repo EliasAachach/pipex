@@ -23,7 +23,7 @@
 				}
 			],
 			"preLaunchTask": "C/C++: clang-12 build active file",
-			"miDebuggerPath": "/usr/local/bin/gdb"
+			"miDebuggerPath": "/usr/bin/gdb"
 		}
 	]
 }
