@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 00:18:29 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/10 16:36:13 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/10 17:59:55 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	cmd_check2(int cmd_ok, char **env_path, char *pathname, t_path *path)
 	{
 		free_split(path->cmd_path);
 		free_split(env_path);
-		perror(pathname);
+		write(2, pathname, ft_strlen(pathname));
+		write(2, " : Command not found\n", 21);
 		return (1);
 	}
 	else
