@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 00:18:29 by elaachac          #+#    #+#             */
-/*   Updated: 2021/10/27 16:19:19 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:36:13 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	file_check(char *pathname, char *path)
 	if (access(pathname, F_OK) == -1)
 	{
 		free(path);
+		path = NULL;
 		perror(pathname);
 		exit(0);
 	}

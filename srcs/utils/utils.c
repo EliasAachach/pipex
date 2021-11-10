@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:31:14 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/09 17:16:15 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:07:55 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,18 @@ void	free_split(char **array)
 	int	i;
 
 	i = 0;
-	if (array && *array)
+	if (array != NULL && *array != NULL)
 	{
 		while (array[i] != NULL)
 		{
 			if (array[i])
+			{
 				free(array[i]);
+				array[i] = NULL;
+			}
 			i++;
 		}
 	}
 	free(array);
+	array = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:51:10 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/09 17:25:19 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:35:59 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,16 @@ void	check_args(int argc, char **argv, t_path *path, t_list **exec)
 		if (cmd_check(path->cmd_argv[0], path) == 1)
 		{
 			free(path->var_env);
+			path->var_env = NULL;
 			free_split(path->cmd_argv);
 			exit(0);
 		}
 		add_tail_list(exec, path->cmd_argv);
 		if (path->cmd_argv)
+		{
 			free_split(path->cmd_argv);
+			path->cmd_argv = NULL;
+		}
 		i++;
 	}
 }
@@ -54,8 +58,8 @@ void	free_path(t_path *path)
 		free(path->var_env);
 	if (path->cmd_path)
 		free_split(path->cmd_path);
-	// if (path->cmd_argv)
-	// 	free_split(path->cmd_argv);
+	if (path->cmd_argv)
+		free_split(path->cmd_argv);
 }
 
 void	init_path(t_path *path, char **envp, int argc)

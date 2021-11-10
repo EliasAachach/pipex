@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 16:38:26 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/09 16:51:50 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:31:17 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,14 @@ int	exec_cmd(int *fd, t_path *path, char **envp, char **args)
 	return (0);
 }
 
-int	exec_last_cmd(int *fd, t_path *path, char **envp, char **args)
+void	exec_last_cmd(int *fd, t_path *path, char **envp, char **args)
 {
-	pid_t	child;
-
-	child = fork();
-	if (child == 0)
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		dup2(fd[3], STDOUT_FILENO);
-		close(fd[3]);
-		execve(path->cmd_path[path->cmd_index], args, envp);
-	}
-	path->cmd_index++;
-	return (0);
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	dup2(fd[3], STDOUT_FILENO);
+	close(fd[3]);
+	execve(path->cmd_path[path->cmd_index], args, envp);
 }
 
 int	cmd_manage(t_path *path, t_list **exec, char **envp, char **argv)
@@ -54,14 +46,14 @@ int	cmd_manage(t_path *path, t_list **exec, char **envp, char **argv)
 	int	ret;
 
 	fd[2] = open(argv[1], O_RDONLY);
-	fd[3] = open(argv[4], O_WRONLY | O_CREAT, 0644);
+	fd[3] = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	fd[4] = dup(STDIN_FILENO);
 	fd[5] = dup(STDOUT_FILENO);
 	path->cmd_index = 0;
 	ret = 0;
 	pipe(fd);
 	ret = exec_cmd(fd, path, envp, (*exec)->head->args);
-	ret = exec_last_cmd(fd, path, envp, (*exec)->head->next->args);
+	exec_last_cmd(fd, path, envp, (*exec)->head->next->args);
 	close(fd[0]);
 	return (ret);
 }
