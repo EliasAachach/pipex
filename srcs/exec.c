@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 16:38:26 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/10 16:31:17 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/15 16:25:59 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	cmd_manage(t_path *path, t_list **exec, char **envp, char **argv)
 	ret = 0;
 	pipe(fd);
 	ret = exec_cmd(fd, path, envp, (*exec)->head->args);
-	exec_last_cmd(fd, path, envp, (*exec)->head->next->args);
+	exec_last_cmd(fd, path, envp, (*exec)->tail->args);
 	close(fd[0]);
 	return (ret);
 }

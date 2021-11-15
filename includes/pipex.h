@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:49:22 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/10 15:20:43 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:55:05 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_path
 	char	**cmd_argv;
 	int		cmd_index;
 	int		argv_index;
+	int		error;
 }				t_path;
 
 t_node	*add_tail_list(t_list **list, char **cmd);
@@ -52,7 +53,7 @@ void	dellist(t_list **list);
 void	ft_bzero(void *s, size_t n);
 void	init_list(t_list **args);
 void	free_path(t_path *path);
-void	file_check(char *pathname, char *path);
+void	file_check(char *pathname, char *file_path, t_path *path);
 void	free_split(char **array);
 void	stock_args(char **cmd, t_path *path);
 char	**ft_split(char const *s, char c);

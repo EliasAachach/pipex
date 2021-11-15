@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 15:40:23 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/10 15:20:15 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/15 16:26:02 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,13 @@ t_node	*init_node(t_node *node, char **cmd)
 	int	i;
 
 	i = 0;
+	while(cmd[i])
+		i++;
+	i++;
 	node->cmd = ft_strdup(cmd[0]);
-	node->args = (char **)malloc(sizeof(char *) * ft_strlen(*cmd));
-	ft_bzero(node->args, sizeof(char *) * ft_strlen(*cmd));
+	node->args = (char **)malloc(sizeof(char *) * i);
+	ft_bzero(node->args, sizeof(char *) * i);
+	i = 0;
 	while (cmd[i])
 	{
 		node->args[i] = ft_strdup(cmd[i]);
