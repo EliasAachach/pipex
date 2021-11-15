@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 00:18:29 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/15 18:14:08 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/15 18:32:23 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	file_check(char *pathname, char *file_path, t_path *path)
 			perror(pathname);
 			path->error = 1;
 		}
-		exit(0);
 	}
 }
 
@@ -31,8 +30,8 @@ int	cmd_check2(int cmd_ok, char **env_path, char *pathname, t_path *path)
 {
 	if (cmd_ok == 0)
 	{
-		free_split(path->cmd_path);
-		free_split(env_path);
+		// free_split(path->cmd_path);
+		// free_split(env_path);
 		if (path->error == 0)
 		{
 			write(2, pathname, ft_strlen(pathname));
