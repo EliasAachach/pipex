@@ -6,11 +6,35 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 16:38:26 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/15 16:25:59 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/16 16:10:25 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	exec_file_error(t_path *path, t_list **exec, char **envp, char **argv)
+{
+	int fd[3];
+
+	pipe(fd);
+	close(fd[1]);
+	fd[2] = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	dup2(fd[2], STDOUT_FILENO);
+	close(fd[2]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[2]);
+	execve(path->cmd_path[path->cmd_index - 1], (*exec)->tail->args, envp);
+}
+
+void	exec_last_cmd(int *fd, t_path *path, char **envp, char **args)
+{
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	dup2(fd[3], STDOUT_FILENO);
+	close(fd[3]);
+	execve(path->cmd_path[path->cmd_index], args, envp);
+}
 
 int	exec_cmd(int *fd, t_path *path, char **envp, char **args)
 {
@@ -28,16 +52,6 @@ int	exec_cmd(int *fd, t_path *path, char **envp, char **args)
 	}
 	path->cmd_index++;
 	return (0);
-}
-
-void	exec_last_cmd(int *fd, t_path *path, char **envp, char **args)
-{
-	close(fd[1]);
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[0]);
-	dup2(fd[3], STDOUT_FILENO);
-	close(fd[3]);
-	execve(path->cmd_path[path->cmd_index], args, envp);
 }
 
 int	cmd_manage(t_path *path, t_list **exec, char **envp, char **argv)

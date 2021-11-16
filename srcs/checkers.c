@@ -6,22 +6,20 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 00:18:29 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/15 18:32:23 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:24:49 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	file_check(char *pathname, char *file_path, t_path *path)
+void	file_check(char *pathname, t_path *path)
 {
 	if (access(pathname, F_OK) == -1)
 	{
-		free(file_path);
-		file_path = NULL;
 		if (path->error == 0)
 		{
 			perror(pathname);
-			path->error = 1;
+			path->file_error = 1;
 		}
 	}
 }
@@ -30,9 +28,8 @@ int	cmd_check2(int cmd_ok, char **env_path, char *pathname, t_path *path)
 {
 	if (cmd_ok == 0)
 	{
-		// free_split(path->cmd_path);
-		// free_split(env_path);
-		if (path->error == 0)
+		free_split(env_path);
+		if (path->file_error == 0 || path->file_error == 2)
 		{
 			write(2, pathname, ft_strlen(pathname));
 			write(2, " : Command not found\n", 21);
