@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 15:40:23 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/15 16:26:02 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/17 10:22:43 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_node	*init_node(t_node *node, char **cmd)
 	int	i;
 
 	i = 0;
-	while(cmd[i])
+	while (cmd[i])
 		i++;
 	i++;
 	node->cmd = ft_strdup(cmd[0]);

@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 16:38:26 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/16 16:10:25 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/17 10:22:20 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exec_file_error(t_path *path, t_list **exec, char **envp, char **argv)
 {
-	int fd[3];
+	int	fd[3];
 
 	pipe(fd);
 	close(fd[1]);

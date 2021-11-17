@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:49:22 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/16 15:48:25 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/17 10:21:59 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
-#ifndef DEFINE_DEBUG_ONCE
-#define DEFINE_DEBUG_ONCE
-
-#if DEBUG
-  #include <stdio.h>
-  #define debug(x, ...)      do{fprintf(stderr, "%s: %s (%u): " x "\n", __FILE__, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}while(0)
-#else
-  #define debug(x, ...)      /* x */
-#endif
-
-#endif
 
 typedef struct s_node
 {

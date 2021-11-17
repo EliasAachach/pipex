@@ -6,7 +6,7 @@
 /*   By: elaachac <elaachac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:51:10 by elaachac          #+#    #+#             */
-/*   Updated: 2021/11/16 16:44:31 by elaachac         ###   ########.fr       */
+/*   Updated: 2021/11/16 16:55:38 by elaachac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 
 	exec = NULL;
 	if (argc != 5)
-		return (0);
+		return (1);
 	init_list(&exec);
 	init_path(&path, envp, argc);
 	check_args(argc, argv, &path, &exec);
